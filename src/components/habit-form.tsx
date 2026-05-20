@@ -1,13 +1,11 @@
 import { useState, type SubmitEvent } from 'react'
 import Button from './button'
+import { useHabits } from '../context/useHabits'
 
-type HabitFormProps = {
-  addHabit: (name: string) => void
-}
-
-const HabitForm = ({ addHabit }: HabitFormProps) => {
+const HabitForm = () => {
 
   const [name, setName] = useState('')
+  const { addHabit } = useHabits()
 
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault()
@@ -15,7 +13,6 @@ const HabitForm = ({ addHabit }: HabitFormProps) => {
     if(name.trim() === '') return
     setName('')
     addHabit(name)
-
   }
 
   return (
@@ -27,7 +24,7 @@ const HabitForm = ({ addHabit }: HabitFormProps) => {
         placeholder='New Habit...'
       />
       <Button 
-        disabled={name.trim()===''} 
+        disabled={name.trim() === ''} 
         className='rounded-lg px-4 py-2 font-medium'
       >
         Add Habit
